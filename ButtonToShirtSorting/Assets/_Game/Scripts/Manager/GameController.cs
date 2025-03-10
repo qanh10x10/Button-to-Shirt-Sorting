@@ -44,6 +44,24 @@ public class GameController : Singleton<GameController>
         UIManager.Instance.m_UIGamePlay.UpdateSlotLeft(buttonRemain);
         List<ButtonInfo> selectColors = ButtonModelSO.Instance.buttons.OrderBy(b => Random.Range(0, ButtonModelSO.Instance.buttons.Count)).Take(buttonRemain).ToList();
 
+        if (!level.isRandom)
+        {
+            for (int i = 0; i < level.buttonCount; i++)
+            {
+                ButtonInfo color = selectColors[i];
+                ShirtSlot slot = SimplePool.Spawn(shirtSlotPrefab, level.slotsPos[i], Quaternion.identity);
+                slot.SetSlotInfo(color);
+            }
+        }
+        else
+        {
+            AutoGenLevel();
+        }
+
+    }
+    public void AutoGenLevel()
+    {
+
     }
     public void LoadEndless()
     {
