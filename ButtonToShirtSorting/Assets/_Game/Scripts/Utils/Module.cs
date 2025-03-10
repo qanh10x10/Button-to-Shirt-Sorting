@@ -7,6 +7,8 @@ using UnityEngine.SceneManagement;
 
 public static class Module
 {
+    public static bool isWin = false;
+    public static bool isLose = false;
 
     #region Internet
 

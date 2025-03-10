@@ -30,16 +30,38 @@ public class UIManager : Singleton<UIManager>
         m_UIHome.gameObject.SetActive(true);
         m_UIHome.CallStart();
     }
-    public void ShowUISetting()
-    {
-        popup_Setting.gameObject.SetActive(true);
-        popup_Setting.CallStart();
-    }
     public void ShowUIGamePlay()
     {
         CloseAllUI();
         m_UIGamePlay.gameObject.SetActive(true);
         m_UIGamePlay.CallStart();
+    }
+    #endregion
+    #region PopUps
+    public void CloseAllPopUp()
+    {
+        foreach (GameObject go in listPopUp)
+        {
+            go.SetActive(false);
+        }
+    }
+    public void Show_PopUpSetting()
+    {
+        CloseAllPopUp();
+        popup_Setting.gameObject.SetActive(true);
+        popup_Setting.CallStart();
+    }
+    public void Show_PopUpWin()
+    {
+        CloseAllPopUp();
+        popup_Win.gameObject.SetActive(true);
+        popup_Win.CallStart();
+    }
+    public void Show_PopUpLose()
+    {
+        CloseAllPopUp();
+        popup_Lose.gameObject.SetActive(true);
+        popup_Lose.CallStart();
     }
     #endregion
 }

@@ -4,27 +4,58 @@ using UnityEngine;
 
 public class GameController : Singleton<GameController>
 {
-    [SerializeField] LevelController level;
+    public LevelController levelController;
+
+    public override void InitAwake()
+    {
+        base.InitAwake();
+    }
+
     public void PlayLevel()
     {
-        level.gameObject.SetActive(true);
-        level.Init(GameMode.Level);
+        Module.isLose = false;
+        Module.isWin = false;
+        if (levelController != null)
+        {
+            levelController.gameObject.SetActive(true);
+            levelController.Init(GameMode.Level);
+        }
     }
+
     public void PlayEndless()
     {
-        level.gameObject.SetActive(true);
-        level.Init(GameMode.Endless);
+        Module.isLose = false;
+        Module.isWin = false;
+        if (levelController != null)
+        {
+            levelController.gameObject.SetActive(true);
+            levelController.Init(GameMode.Endless);
+        }
     }
+
     public void DoWin()
     {
-        level.gameObject.SetActive(false);
+        if (Module.isWin) return;
+        Module.isWin = true;
+        UIManager.Instance.Show_PopUpWin();
     }
+
     public void DoLose()
     {
-        level.gameObject.SetActive(false);
+        if (Module.isLose) return;
+        Module.isLose = true;
+        UIManager.Instance.Show_PopUpLose();
     }
+
     public void BackToHome()
     {
-        level.gameObject.SetActive(false);
+        UIManager.Instance.ShowUIHome();
+    }
+    public void ResetLevel()
+    {
+        levelController.ClearLevel();
+        Module.isLose = false;
+        Module.isWin = false;
+        levelController.Init(levelController.gameMode);
     }
 }
