@@ -23,13 +23,17 @@ public class UIHome : MonoBehaviour
 
     private void Action_btnPlayLevel()
     {
-
+        GameController.Instance.gameObject.SetActive(true);
+        Module.GameMode = GameMode.Level;
+        GameController.Instance.Init();
         UIManager.Instance.ShowUIGamePlay();
     }
 
     private void Action_btnPlayEndless()
     {
-
+        GameController.Instance.gameObject.SetActive(true);
+        Module.GameMode = GameMode.Endless;
+        GameController.Instance.Init();
         UIManager.Instance.ShowUIGamePlay();
     }
 }

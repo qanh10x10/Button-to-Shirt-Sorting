@@ -5,9 +5,10 @@ using UnityEngine;
 public class ShirtSlot : MonoBehaviour
 {
     [SerializeField] ButtonInfo slotInfo;
+    public SpriteRenderer imgSlot;
     public void SetSlotInfo(ButtonInfo _info)
     {
         slotInfo = _info;
-        GetComponent<SpriteRenderer>().color = slotInfo.color;
+        imgSlot.color = slotInfo.color;
     }
 }

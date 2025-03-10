@@ -9,11 +9,16 @@ public static class Module
 {
     public static bool isWin = false;
     public static bool isLose = false;
-
+    public static GameMode GameMode;
     public static int cr_Level
     {
         get => PlayerPrefs.GetInt("cr_Level", 1);
         set => PlayerPrefs.SetInt("cr_Level", value);
+    }
+    public static int cr_EndlessLevel
+    {
+        get => PlayerPrefs.GetInt("cr_EndlessLevel", 1);
+        set => PlayerPrefs.SetInt("cr_EndlessLevel", value);
     }
 
     #region Internet

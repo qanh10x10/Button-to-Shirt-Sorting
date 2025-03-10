@@ -9,7 +9,7 @@ public class ButtonCtrl : MonoBehaviour
 {
     [SerializeField] ButtonInfo buttonInfo;
     public GameObject objPlaced;
-    [SerializeField] SpriteRenderer imgBtn;
+    public SpriteRenderer imgBtn;
     private Vector3 originalPos;
     private bool isPlaced = false;
     public bool IsPlaced => isPlaced;
@@ -21,7 +21,7 @@ public class ButtonCtrl : MonoBehaviour
     {
         buttonInfo = _info;
         imgBtn.sprite = buttonInfo.sprite;
-        objPlaced.SetActive(false);
+        //objPlaced.SetActive(false);
     }
 
     public void OnMouseDrag()

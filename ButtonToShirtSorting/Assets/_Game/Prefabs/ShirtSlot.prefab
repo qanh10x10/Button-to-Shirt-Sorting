@@ -10,10 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3570447201060905695}
   - component: {fileID: 7600080508846894110}
-  - component: {fileID: 2834247081434409815}
-  - component: {fileID: 8374106666529746451}
-  m_Layer: 0
-  m_Name: ButtonCtrl
+  - component: {fileID: -318069455579215826}
+  - component: {fileID: -665415372607606459}
+  m_Layer: 6
+  m_Name: ShirtSlot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -70,7 +70,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.6
---- !u!114 &2834247081434409815
+--- !u!114 &-318069455579215826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -79,16 +79,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4205583326822447851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: de335703d9b39be408d6bbaed08478f0, type: 3}
+  m_Script: {fileID: 11500000, guid: 56730efcca01ac44482ce233c82bd448, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonInfo:
+  slotInfo:
     name: 
     color: {r: 0, g: 0, b: 0, a: 0}
     sprite: {fileID: 0}
-  objPlaced: {fileID: 0}
-  imgBtn: {fileID: 6993613668185748250}
---- !u!114 &8374106666529746451
+  imgSlot: {fileID: 6993613668185748250}
+--- !u!114 &-665415372607606459
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -110,7 +109,7 @@ GameObject:
   m_Component:
   - component: {fileID: 36617704444250889}
   - component: {fileID: 6993613668185748250}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -172,13 +171,13 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 1833835860, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  m_SortingOrder: -1
+  m_Sprite: {fileID: 21300000, guid: cd04055cfbc3e5e419d9d1ff03c9adc1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 2.25, y: 2.25}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
