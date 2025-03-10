@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class UIGamePlay : MonoBehaviour
 {
+    [SerializeField] TextMeshProUGUI txtLevel;
     [SerializeField] TextMeshProUGUI txtSlot;
     [SerializeField] TextMeshProUGUI txtTime;
     [SerializeField] UIButton btnMenu;
@@ -13,15 +14,30 @@ public class UIGamePlay : MonoBehaviour
 
     public void CallStart()
     {
+        switch (GameController.Instance.gameMode)
+        {
+            case GameMode.None:
+                break;
+            case GameMode.Level:
+                txtLevel.text = "Level " + Module.cr_Level;
+                break;
+            case GameMode.Endless:
+                txtLevel.text = "Endless";
+                break;
+            default:
+                break;
+        }
         btnMenu.SetUpEvent(OnMenuClicked);
         btnHint.SetUpEvent(OnHintClicked);
         btnReset.SetUpEvent(OnResetClicked);
     }
-
-    public void UpdateUI(int remainingButtons, float remainingTime)
+    public void UpdateSlotLeft(int remainingButtons)
     {
         if (txtSlot != null)
             txtSlot.text = $"Remaining: {remainingButtons}";
+    }
+    public void UpdateTime(float remainingTime)
+    {
         if (txtTime != null)
             txtTime.text = $"Time: {Mathf.CeilToInt(remainingTime)}";
     }
@@ -38,9 +54,6 @@ public class UIGamePlay : MonoBehaviour
 
     private void OnResetClicked()
     {
-        if (GameController.Instance.levelController != null)
-        {
-            GameController.Instance.ResetLevel();
-        }
+        GameController.Instance.ResetLevel();
     }
 }

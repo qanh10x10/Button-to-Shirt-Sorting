@@ -5,8 +5,8 @@ using UnityEngine;
 public class UIManager : Singleton<UIManager>
 {
     [SerializeField] List<GameObject> listUI;
-    [SerializeField] UIHome m_UIHome;
-    [SerializeField] UIGamePlay m_UIGamePlay;
+    public UIHome m_UIHome;
+    public UIGamePlay m_UIGamePlay;
     [SerializeField] List<GameObject> listPopUp;
     [SerializeField] PopUpWin popup_Win;
     [SerializeField] PopUpLose popup_Lose;

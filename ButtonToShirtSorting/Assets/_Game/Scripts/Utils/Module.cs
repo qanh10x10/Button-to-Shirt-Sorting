@@ -10,6 +10,12 @@ public static class Module
     public static bool isWin = false;
     public static bool isLose = false;
 
+    public static int cr_Level
+    {
+        get => PlayerPrefs.GetInt("cr_Level", 1);
+        set => PlayerPrefs.SetInt("cr_Level", value);
+    }
+
     #region Internet
 
     public static bool isNetworking()
