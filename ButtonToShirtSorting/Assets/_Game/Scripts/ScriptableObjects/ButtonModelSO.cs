@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,8 +18,12 @@ public class ButtonModelSO : ScriptableObject
     }
     public static ButtonModelSO _instance;
     public List<ButtonInfo> buttons = new List<ButtonInfo>();
+    public ButtonInfo GetRandomColor()
+    {
+        return buttons[Random.Range(0, buttons.Count)];
+    }
 }
-[Serializable]
+[System.Serializable]
 public class ButtonInfo
 {
     public string name;

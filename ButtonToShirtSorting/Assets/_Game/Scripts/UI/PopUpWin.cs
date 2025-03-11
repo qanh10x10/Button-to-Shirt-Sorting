@@ -9,6 +9,7 @@ public class PopUpWin : MonoBehaviour
     [SerializeField] UIButton btnNextLevel;
     public void CallStart()
     {
+        SoundManager.Instance.PlayFx(1);
         btnHome.SetUpEvent(Action_btnHome);
         btnNextLevel.SetUpEvent(Action_btnNextLevel);
     }

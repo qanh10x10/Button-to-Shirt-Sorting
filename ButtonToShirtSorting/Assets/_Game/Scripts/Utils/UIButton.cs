@@ -30,7 +30,7 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, I
 
     public void OnPointerDown(PointerEventData data)
     {
-        //SoundManager.Instance.PlayFx();
+        SoundManager.Instance.PlayFx(0);
         
         if (isFxz&& this.interactable)
             transform.localScale = localScaleOld * scaleRate;

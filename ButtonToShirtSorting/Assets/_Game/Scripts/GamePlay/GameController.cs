@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ public class GameController : Singleton<GameController>
     public GameMode gameMode;
     public LevelModelSO level;
     public GameObject trGamelevel;
-    public int timeRemaining = 100;
+    public int timeRemaining = 99;
     public int buttonRemain = 10;
 
     [Header("Prefabs Ref")]
@@ -36,7 +37,7 @@ public class GameController : Singleton<GameController>
                 break;
             case GameMode.Endless:
                 LoadEndless();
-                timeRemaining = 1000;
+                timeRemaining = 999;
                 break;
             default:
                 break;
@@ -49,13 +50,19 @@ public class GameController : Singleton<GameController>
     public void LoadLevel()
     {
         ResetLevel();
+        timeRemaining = 99;
         Module.isLose = false;
         Module.isWin = false;
         level = Resources.Load<LevelModelSO>(string.Format("Levels/Lv{0}", Module.cr_Level));
         buttonRemain = level.buttonCount;
         UIManager.Instance.m_UIGamePlay.UpdateSlotLeft(buttonRemain);
-        List<ButtonInfo> selectColors = ButtonModelSO.Instance.buttons.OrderBy(b => Random.Range(0, ButtonModelSO.Instance.buttons.Count)).Take(buttonRemain).ToList();
+        //List<ButtonInfo> selectColors = ButtonModelSO.Instance.buttons.OrderBy(b => Random.Range(0, ButtonModelSO.Instance.buttons.Count)).Take(buttonRemain).ToList();
 
+        List<ButtonInfo> selectColors = new List<ButtonInfo>();
+        for (int i = 0; i < buttonRemain; i++)
+        {
+            selectColors.Add(ButtonModelSO.Instance.buttons[Random.Range(0, ButtonModelSO.Instance.buttons.Count)]);
+        }
         if (!level.isRandom)
         {
             for (int i = 0; i < level.buttonCount; i++)
@@ -82,7 +89,7 @@ public class GameController : Singleton<GameController>
         buttonRemain = level.buttonCount;
         for (int i = 0; i < buttonRemain; i++)
         {
-            ButtonInfo info = level.GetRandomColor();
+            ButtonInfo info = ButtonModelSO.Instance.GetRandomColor();
             Vector3 randomPos_Btn;
             int attempt = 0;
             do
@@ -235,15 +242,14 @@ public class GameController : Singleton<GameController>
         if (crTimeRemain != null)
             StopCoroutine(crTimeRemain);
     }
-
-    public void BackToHome()
-    {
-        UIManager.Instance.ShowUIHome();
-    }
     public void ResetLevel()
     {
         Module.isLose = false;
         Module.isWin = false;
+        RemoveAllObject();
+    }
+    public void RemoveAllObject()
+    {
         foreach (var item in removeButtons)
         {
             item.DespawnObj();
@@ -251,11 +257,19 @@ public class GameController : Singleton<GameController>
         removeButtons.Clear();
         foreach (var item in removeSlots)
         {
-            SimplePool.Despawn(item.gameObject);
+            item.DespawnObj();
         }
         removeSlots.Clear();
-        shirtSlotList.Clear();
+        foreach (var item in buttonList)
+        {
+            item.DespawnObj();
+        }
         buttonList.Clear();
+        foreach (var item in shirtSlotList)
+        {
+            item.DespawnObj();
+        }
+        shirtSlotList.Clear();
     }
     Coroutine crTimeRemain;
     IEnumerator IeTimerCountdown()
@@ -304,7 +318,7 @@ public class GameController : Singleton<GameController>
             }
         }
 
-        //AutoShowHint();
+        ShowHint();
     }
     #region Hint
     Coroutine crHint;
@@ -323,7 +337,7 @@ public class GameController : Singleton<GameController>
         }
         foreach (var button in buttonList)
         {
-            if (button.IsPlaced)
+            if (!button.IsPlaced)
             {
                 foreach (var slot in shirtSlotList)
                 {
@@ -331,9 +345,36 @@ public class GameController : Singleton<GameController>
                     {
                         button.ShowHint();
                         slot.ShowHint();
+                        break;
                     }
                 }
             }
+            break;
+        }
+    }
+    bool isRunningHint = false;
+    public void OnClickButtonHint()
+    {
+        if (isRunningHint) return;
+        foreach (var button in buttonList)
+        {
+            if (!button.IsPlaced)
+            {
+                foreach (var slot in shirtSlotList)
+                {
+                    if (button.buttonInfo == slot.slotInfo)
+                    {
+                        isRunningHint = true;
+                        button.transform.DOMove(slot.transform.position, 1f).OnComplete(() =>
+                        {
+                            button.SetAuto(slot);
+                            isRunningHint = false;
+                        });
+                        break;
+                    }
+                }
+            }
+            break;
         }
     }
     #endregion

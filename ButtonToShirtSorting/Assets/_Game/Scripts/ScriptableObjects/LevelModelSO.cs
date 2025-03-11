@@ -17,10 +17,6 @@ public class LevelModelSO : ScriptableObject
     public List<Vector2> slotsPos;
 
     public List<ButtonInfo> buttonInfos;
-    public ButtonInfo GetRandomColor()
-    {
-        return buttonInfos[Random.Range(0, buttonInfos.Count)];
-    }
     public LevelModelSO CreateNewLevel(int _level)
     {
         LevelModelSO newLevel = ScriptableObject.CreateInstance<LevelModelSO>();

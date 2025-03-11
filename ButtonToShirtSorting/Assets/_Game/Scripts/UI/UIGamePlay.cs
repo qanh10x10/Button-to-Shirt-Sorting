@@ -49,7 +49,7 @@ public class UIGamePlay : MonoBehaviour
 
     private void OnHintClicked()
     {
-
+        GameController.Instance.OnClickButtonHint();
     }
 
     private void OnResetClicked()

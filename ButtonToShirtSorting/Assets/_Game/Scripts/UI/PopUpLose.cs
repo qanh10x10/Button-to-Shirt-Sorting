@@ -7,6 +7,7 @@ public class PopUpLose : MonoBehaviour
     [SerializeField] UIButton btnHome;
     public void CallStart()
     {
+        SoundManager.Instance.PlayFx(2);
         btnHome.SetUpEvent(Action_btnHome);
     }
 

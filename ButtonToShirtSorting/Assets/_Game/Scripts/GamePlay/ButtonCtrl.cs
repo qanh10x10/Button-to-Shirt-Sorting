@@ -44,7 +44,7 @@ public class ButtonCtrl : MonoBehaviour
         foreach (Collider2D hitCollider in hitColliders)
         {
             ShirtSlot slot = hitCollider.GetComponent<ShirtSlot>();
-            if (slot != null && slot.IsMatchingColor(buttonInfo))
+            if (slot != null && slot.IsMatchingColor(buttonInfo) && !slot.isPlaced)
             {
                 matchingSlots.Add(slot);
             }
@@ -56,6 +56,7 @@ public class ButtonCtrl : MonoBehaviour
 
             transform.position = bestSlot.transform.position;
             isPlaced = true;
+            bestSlot.isPlaced = true;
             objPlaced.SetActive(true);
 
             GameController.Instance.RemainChecking(bestSlot, this);

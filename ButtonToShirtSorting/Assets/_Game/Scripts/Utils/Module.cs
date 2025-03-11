@@ -9,6 +9,8 @@ public static class Module
 {
     public static bool isWin = false;
     public static bool isLose = false;
+    public static int sound_fx = 1;
+    public static int music_fx = 1;
     public static GameMode GameMode;
     public static int cr_Level
     {

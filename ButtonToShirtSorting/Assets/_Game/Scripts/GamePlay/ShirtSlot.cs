@@ -8,6 +8,7 @@ public class ShirtSlot : MonoBehaviour
     public ButtonInfo slotInfo;
     public SpriteRenderer imgSlot;
     public ParticleSystem hintFX;
+    public bool isPlaced = false;
     public void SetSlotInfo(ButtonInfo _info)
     {
         slotInfo = _info;
@@ -21,6 +22,11 @@ public class ShirtSlot : MonoBehaviour
     {
         hintFX.gameObject.SetActive(true);
         hintFX.Play();
+    }
+    public void DespawnObj()
+    {
+        isPlaced = false;
+        SimplePool.Despawn(gameObject);
     }
     public void HideHint()
     {
