@@ -49,7 +49,10 @@ public class UIGamePlay : MonoBehaviour
 
     private void OnHintClicked()
     {
-        GameController.Instance.OnClickButtonHint();
+        AdsManager.Instance.ShowAd_Reward(() =>
+        {
+            GameController.Instance.OnClickButtonHint();
+        });
     }
 
     private void OnResetClicked()
