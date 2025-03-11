@@ -12,17 +12,49 @@ Button to Shirt Sorting is a casual puzzle game developed in Unity. The core gam
 - Time-based challenge
 - Hint system to help when you're stuck
 - Auto-place feature (mock rewarded ad)
+  
+🎮 APK Gameplay Demo
+📌 Link APK: https://github.com/qanh10x10/Button-to-Shirt-Sorting/blob/main/BuildAPK/ButtonToShirtSorting.apk
 
-## Technical Details
+🎥 Gameplay Demo
+📌 Video Link: 
 
 ### Unity Version
 - Developed with Unity 2021 LTS
 
+### Project Structure
+```
+ButtonToShirtSorting/
+├── Assets/
+│   ├── _Game/
+│   │   ├── Animations/     # Button and UI animations
+│   │   ├── Prefabs/        # Button and shirt slot prefabs
+│   │   ├── Scenes/         # Main game scenes
+│   │   ├── Scripts/        # Game logic and mechanics
+│   │   │   ├── Buttons/    # Button behavior scripts
+│   │   │   ├── Game/       # Core gameplay management
+│   │   │   ├── Levels/     # Level configuration
+│   │   │   ├── UI/         # User interface controllers
+│   │   │   └── Utils/      # Helper utilities
+│   │   ├── ScriptableObjects/ # Data configurations
+│   │   │   ├── Buttons/    # Button color and type definitions
+│   │   │   └── Levels/     # Level data configurations
+│   │   └── Sprites/        # Game art and UI elements
+│   ├── Plugins/            # Third-party plugins
+│   └── TextMesh Pro/       # Text rendering system
+├── Packages/               # Unity package dependencies
+├── ProjectSettings/        # Unity project configuration
+└── BuildAPK/               # Android build output
+```
+
 ### Setup Instructions
 1. Clone this repository
-2. Open the project in Unity (2021 LTS or later recommended)
-3. Open the main scene in `Assets/_Game/Scenes`
-4. Press Play to test the game in the editor
+```sh
+git clone https://github.com/qanh10x10/Button-to-Shirt-Sorting.git
+```
+3. Open the project in Unity (2021 LTS or later recommended)
+4. Open the main scene in `Assets/_Game/Scenes`
+5. Press Play to test the game in the editor
 
 ### Controls
 - **Drag & Drop**: Touch and drag buttons to place them in matching slots
