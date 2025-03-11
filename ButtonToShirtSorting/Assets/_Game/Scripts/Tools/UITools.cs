@@ -329,7 +329,7 @@ public class UITools : MonoBehaviour
     [ContextMenu("Gen100Level")]
     public void Gen100Level()
     {
-        int lvmin = 21;
+        int lvmin = 8;
         int lvMax = 100;
         for (int i = lvmin; i <= lvMax; i++)
         {

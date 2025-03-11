@@ -16,13 +16,14 @@ public class PopUpWin : MonoBehaviour
     private void Action_btnNextLevel()
     {
         OnClose();
+        GameController.Instance.LoadLevel();
         UIManager.Instance.ShowUIGamePlay();
     }
 
     private void Action_btnHome()
     {
         OnClose();
-        GameController.Instance.BackToHome();
+        GameController.Instance.ResetLevel();
         UIManager.Instance.ShowUIHome();
     }
 

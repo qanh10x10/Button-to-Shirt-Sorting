@@ -13,7 +13,7 @@ public class PopUpLose : MonoBehaviour
     private void Action_btnHome()
     {
         CallEnd();
-        GameController.Instance.BackToHome();
+        GameController.Instance.ResetLevel();
         UIManager.Instance.ShowUIHome();
     }
 

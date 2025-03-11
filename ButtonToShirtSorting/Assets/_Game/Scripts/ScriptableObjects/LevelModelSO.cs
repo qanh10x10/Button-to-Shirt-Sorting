@@ -26,7 +26,7 @@ public class LevelModelSO : ScriptableObject
         LevelModelSO newLevel = ScriptableObject.CreateInstance<LevelModelSO>();
         newLevel.level = _level;
         newLevel.timeCountdown = 99;
-        newLevel.buttonCount = Random.Range(5, 8) + _level / 5;
+        newLevel.buttonCount = Random.Range(4, 6) + _level / 6;
         newLevel.isRandom = true;
 
         string path = "Assets/_Game/Resources/Levels/Lv" + _level + ".asset";

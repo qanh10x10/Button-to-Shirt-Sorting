@@ -14,10 +14,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   level: 1
   timeCountdown: 99
-  buttonCount: 7
-  isRandom: 1
-  buttonsPos: []
-  slotsPos: []
+  buttonCount: 5
+  isRandom: 0
+  buttonsPos:
+  - {x: 0.8498933, y: -5.786613}
+  - {x: -2.8336184, y: -6.5118613}
+  - {x: -0.15545322, y: -6.523618}
+  - {x: -3.7646675, y: -5.673673}
+  - {x: 2.5156624, y: -4.8765807}
+  slotsPos:
+  - {x: -0.010581984, y: 2.7830696}
+  - {x: -0.010581984, y: 0.32804248}
+  - {x: -0.010581984, y: 1.5978837}
+  - {x: -0.031745955, y: -2.1904755}
+  - {x: -0.010581984, y: -0.920635}
   buttonInfos:
   - name: Red
     color: {r: 0.9686275, g: 0.10196079, b: 0.16470589, a: 1}

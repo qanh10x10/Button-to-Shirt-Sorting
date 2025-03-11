@@ -15,12 +15,13 @@ public class GameController : Singleton<GameController>
     [Header("Prefabs Ref")]
     [SerializeField] ButtonCtrl buttonPrefab;
     [SerializeField] ShirtSlot shirtSlotPrefab;
-
     [Header("ReadOnly")]
     [SerializeField] private SpriteRenderer spawnArea_Button;
     [SerializeField] private SpriteRenderer spawnArea_Slot;
     [SerializeField] List<ButtonCtrl> buttonList;
     [SerializeField] List<ShirtSlot> shirtSlotList;
+    [SerializeField] List<ButtonCtrl> removeButtons;
+    [SerializeField] List<ShirtSlot> removeSlots;
 
     private float spacing = 1f;
     List<Vector3> spawns_ButtonPos = new List<Vector3>();
@@ -35,16 +36,19 @@ public class GameController : Singleton<GameController>
                 break;
             case GameMode.Endless:
                 LoadEndless();
+                timeRemaining = 1000;
                 break;
             default:
                 break;
         }
-        if (ctTimeRemain != null)
-            StopCoroutine(ctTimeRemain);
-        ctTimeRemain = StartCoroutine(IeTimerCountdown());
+        if (crTimeRemain != null)
+            StopCoroutine(crTimeRemain);
+        crTimeRemain = StartCoroutine(IeTimerCountdown());
+        ShowHint();
     }
     public void LoadLevel()
     {
+        ResetLevel();
         Module.isLose = false;
         Module.isWin = false;
         level = Resources.Load<LevelModelSO>(string.Format("Levels/Lv{0}", Module.cr_Level));
@@ -79,7 +83,6 @@ public class GameController : Singleton<GameController>
         for (int i = 0; i < buttonRemain; i++)
         {
             ButtonInfo info = level.GetRandomColor();
-            //Buttons Spawn
             Vector3 randomPos_Btn;
             int attempt = 0;
             do
@@ -94,8 +97,6 @@ public class GameController : Singleton<GameController>
             button.transform.parent = spawnArea_Button.transform;
             buttonList.Add(button);
 
-
-            //Slots Spawn
             Vector3 randomPos_Slot;
             int attempts = 0;
             do
@@ -163,10 +164,15 @@ public class GameController : Singleton<GameController>
     }
     public void LoadEndless()
     {
+        ResetLevel();
         Module.isLose = false;
-        buttonRemain = Random.Range(5, 10) + Module.cr_Level / 5;
+        buttonRemain = Random.Range(5, 10) + Module.cr_EndlessLevel / 5;
         UIManager.Instance.m_UIGamePlay.UpdateSlotLeft(buttonRemain);
-        List<ButtonInfo> selectColors = ButtonModelSO.Instance.buttons.OrderBy(b => Random.Range(0, ButtonModelSO.Instance.buttons.Count)).Take(buttonRemain).ToList();
+        List<ButtonInfo> selectColors = new List<ButtonInfo>();// = ButtonModelSO.Instance.buttons.OrderBy(b => Random.Range(0, ButtonModelSO.Instance.buttons.Count)).Take(buttonRemain).ToList();
+        for (int i = 0; i < buttonRemain; i++)
+        {
+            selectColors.Add(ButtonModelSO.Instance.buttons[Random.Range(0, ButtonModelSO.Instance.buttons.Count)]);
+        }
         for (int i = 0; i < buttonRemain; i++)
         {
             ButtonInfo _info = selectColors[i];
@@ -184,8 +190,6 @@ public class GameController : Singleton<GameController>
             button.transform.parent = spawnArea_Button.transform;
             buttonList.Add(button);
 
-
-            //Slots Spawn
             Vector3 randomPos_Slot;
             int attempts = 0;
             do
@@ -201,11 +205,25 @@ public class GameController : Singleton<GameController>
             shirtSlotList.Add(slot);
         }
     }
-    public void DoWin()
+    public void DoWinLevel()
     {
         if (Module.isWin) return;
         Module.isWin = true;
+        Module.cr_Level++;
         UIManager.Instance.Show_PopUpWin();
+        if (crTimeRemain != null)
+            StopCoroutine(crTimeRemain);
+        crTimeRemain = StartCoroutine(IeTimerCountdown());
+    }
+    public void DoWinEndless()
+    {
+        if (Module.isWin) return;
+        Module.isWin = true;
+        Module.cr_EndlessLevel++;
+        LoadEndless();
+        if (crTimeRemain != null)
+            StopCoroutine(crTimeRemain);
+        crTimeRemain = StartCoroutine(IeTimerCountdown());
     }
 
     public void DoLose()
@@ -214,6 +232,8 @@ public class GameController : Singleton<GameController>
         Module.isLose = true;
         UIManager.Instance.Show_PopUpLose();
         Module.GameMode = GameMode.None;
+        if (crTimeRemain != null)
+            StopCoroutine(crTimeRemain);
     }
 
     public void BackToHome()
@@ -224,8 +244,20 @@ public class GameController : Singleton<GameController>
     {
         Module.isLose = false;
         Module.isWin = false;
+        foreach (var item in removeButtons)
+        {
+            item.DespawnObj();
+        }
+        removeButtons.Clear();
+        foreach (var item in removeSlots)
+        {
+            SimplePool.Despawn(item.gameObject);
+        }
+        removeSlots.Clear();
+        shirtSlotList.Clear();
+        buttonList.Clear();
     }
-    Coroutine ctTimeRemain;
+    Coroutine crTimeRemain;
     IEnumerator IeTimerCountdown()
     {
         UIManager.Instance.m_UIGamePlay.UpdateTime(timeRemaining);
@@ -244,8 +276,10 @@ public class GameController : Singleton<GameController>
     public void RemainChecking(ShirtSlot _slot, ButtonCtrl _btn)
     {
         //SoundManager.Instance.PlayOnCamera(clipCollect);
-        //_slot.HideHintEffect();
-        //_btn.HideHintEffect();
+        _slot.HideHint();
+        _btn.HideHint();
+        removeButtons.Add(_btn);
+        removeSlots.Add(_slot);
         shirtSlotList.Remove(_slot);
         buttonList.Remove(_btn);
 
@@ -254,15 +288,55 @@ public class GameController : Singleton<GameController>
         if (buttonRemain <= 0)
         {
             //Show Win
-            if (ctTimeRemain != null)
-                StopCoroutine(ctTimeRemain);
+            if (crTimeRemain != null)
+                StopCoroutine(crTimeRemain);
 
-            //state = EGameState.GameOver;
-            DoWin();
+            switch (gameMode)
+            {
+                case GameMode.Level:
+                    DoWinLevel();
+                    break;
+                case GameMode.Endless:
+                    DoWinEndless();
+                    break;
+                default:
+                    break;
+            }
         }
 
         //AutoShowHint();
     }
+    #region Hint
+    Coroutine crHint;
+    public void ShowHint()
+    {
+        if (crHint != null) StopCoroutine(crHint);
+        crHint = StartCoroutine(IShowHint());
+    }
+    public IEnumerator IShowHint()
+    {
+        int time = 10;
+        while (time > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            time--;
+        }
+        foreach (var button in buttonList)
+        {
+            if (button.IsPlaced)
+            {
+                foreach (var slot in shirtSlotList)
+                {
+                    if (button.buttonInfo == slot.slotInfo)
+                    {
+                        button.ShowHint();
+                        slot.ShowHint();
+                    }
+                }
+            }
+        }
+    }
+    #endregion
 }
 public enum GameMode
 {

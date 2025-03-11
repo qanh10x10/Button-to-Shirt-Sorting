@@ -34,7 +34,7 @@ public class UIGamePlay : MonoBehaviour
     public void UpdateSlotLeft(int remainingButtons)
     {
         if (txtSlot != null)
-            txtSlot.text = $"Remaining: {remainingButtons}";
+            txtSlot.text = $"Slot Left: {remainingButtons}";
     }
     public void UpdateTime(float remainingTime)
     {

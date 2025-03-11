@@ -1,0 +1,63 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f53f78d97211f9d449ae50557b732b51, type: 3}
+  m_Name: Lv4
+  m_EditorClassIdentifier: 
+  level: 4
+  timeCountdown: 99
+  buttonCount: 6
+  isRandom: 0
+  buttonsPos:
+  - {x: 0.9507846, y: -6.577115}
+  - {x: 1.5591635, y: -5.6331015}
+  - {x: 2.5241373, y: -6.1388645}
+  - {x: -1.3679444, y: -7.07417}
+  - {x: 2.8874972, y: -4.852312}
+  - {x: -1.3723512, y: -5.801198}
+  slotsPos:
+  - {x: -1.5978832, y: 0.39153454}
+  - {x: -0.9629627, y: 1.9576716}
+  - {x: -0.89947087, y: -0.9629627}
+  - {x: 0.8148149, y: 1.8730164}
+  - {x: 0.96296346, y: -0.8783062}
+  - {x: 1.4497352, y: 0.5820107}
+  buttonInfos:
+  - name: Red
+    color: {r: 0.9686275, g: 0.10196079, b: 0.16470589, a: 1}
+    sprite: {fileID: 1833835860, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: Blue
+    color: {r: 0.11764707, g: 0.54901963, b: 0.90196085, a: 1}
+    sprite: {fileID: -1393293977, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: Green
+    color: {r: 0.54901963, g: 0.7372549, b: 0.121568635, a: 1}
+    sprite: {fileID: 1533254364, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: Yellow
+    color: {r: 0.91372555, g: 0.72156864, b: 0.1254902, a: 1}
+    sprite: {fileID: 786026600, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: Black
+    color: {r: 0, g: 0, b: 0, a: 1}
+    sprite: {fileID: -1317209129, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: White
+    color: {r: 1, g: 1, b: 1, a: 1}
+    sprite: {fileID: -1828097205, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: Purple
+    color: {r: 0.6901961, g: 0.227451, b: 0.90196085, a: 1}
+    sprite: {fileID: 152139517, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: Brown
+    color: {r: 0.5764706, g: 0.29803923, b: 0.21960786, a: 1}
+    sprite: {fileID: 496908274, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: Pink
+    color: {r: 0.9960785, g: 0.3137255, b: 0.4901961, a: 1}
+    sprite: {fileID: -907051067, guid: fd07090de546267489da1c42a3df36b6, type: 3}
+  - name: Orange
+    color: {r: 0.9490197, g: 0.48235297, b: 0.10980393, a: 1}
+    sprite: {fileID: -1675169850, guid: fd07090de546267489da1c42a3df36b6, type: 3}
