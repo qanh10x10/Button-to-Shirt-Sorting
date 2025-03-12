@@ -68,6 +68,7 @@ public class PopUpSetting : MonoBehaviour
     {
         OnClose();
         GameController.Instance.ResetLevel();
+        GameController.Instance.trGamelevel.SetActive(false);
         UIManager.Instance.ShowUIHome();
     }
 

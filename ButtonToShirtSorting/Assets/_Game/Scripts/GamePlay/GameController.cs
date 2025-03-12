@@ -29,6 +29,7 @@ public class GameController : Singleton<GameController>
     List<Vector3> spawns_SlotPos = new List<Vector3>();
     public void Init()
     {
+        trGamelevel.SetActive(true);
         this.gameMode = Module.GameMode;
         switch (gameMode)
         {

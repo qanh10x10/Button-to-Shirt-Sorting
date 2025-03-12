@@ -58,5 +58,6 @@ public class UIGamePlay : MonoBehaviour
     private void OnResetClicked()
     {
         GameController.Instance.ResetLevel();
+        GameController.Instance.Init();
     }
 }

@@ -23,7 +23,6 @@ public class UIHome : MonoBehaviour
 
     private void Action_btnPlayLevel()
     {
-        GameController.Instance.trGamelevel.SetActive(true);
         Module.GameMode = GameMode.Level;
         GameController.Instance.Init();
         UIManager.Instance.ShowUIGamePlay();
@@ -31,7 +30,6 @@ public class UIHome : MonoBehaviour
 
     private void Action_btnPlayEndless()
     {
-        GameController.Instance.trGamelevel.SetActive(true);
         Module.GameMode = GameMode.Endless;
         GameController.Instance.Init();
         UIManager.Instance.ShowUIGamePlay();
