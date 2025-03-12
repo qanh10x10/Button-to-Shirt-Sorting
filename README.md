@@ -17,7 +17,7 @@ Button to Shirt Sorting is a casual puzzle game developed in Unity. The core gam
 📌 Link APK: https://github.com/qanh10x10/Button-to-Shirt-Sorting/blob/main/BuildAPK/ButtonToShirtSorting.apk
 
 🎥 Gameplay Demo
-📌 Video Link: 
+📌 Video Link: https://github.com/qanh10x10/Button-to-Shirt-Sorting/blob/main/VideoGame/Demo%20Video.mp4
 
 ### Unity Version
 - Developed with Unity 2021 LTS
